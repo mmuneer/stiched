@@ -8,6 +8,7 @@ class ClearancingService
       potential_item_id = row[0].to_i
       clearancing_error = what_is_the_clearancing_error?(potential_item_id)
       if clearancing_error
+        #replace this with clearance_logger
         clearancing_status.errors << clearancing_error
       else
         clearancing_status.item_ids_to_clearance << potential_item_id
@@ -33,6 +34,7 @@ private
     clearancing_status
   end
 
+  #Create a separate Class? Create a Rules class?
   def what_is_the_clearancing_error?(potential_item_id)
     if potential_item_id.blank? || potential_item_id == 0 || !potential_item_id.is_a?(Integer)
       return "Item id #{potential_item_id} is not valid"      

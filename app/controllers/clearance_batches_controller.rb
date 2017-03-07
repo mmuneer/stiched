@@ -13,16 +13,15 @@ class ClearanceBatchesController < ApplicationController
     else
       alert_messages << "No new clearance batch was added"
     end
+
     if clearancing_status.errors.any?
       alert_messages << "#{clearancing_status.errors.count} item ids raised errors and were not clearanced"
+      #remove logic to clearance_logger
       clearancing_status.errors.each {|error| alert_messages << error }
     end
     flash[:alert] = alert_messages.join("<br/>") if alert_messages.any?
     redirect_to action: :index
   end
 
-  def successful_clearances
-
-  end
 
 end

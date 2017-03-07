@@ -22,7 +22,7 @@
         <td>Clearance Batch <%= clearance_batch.id %></td>
         <td><%= l(clearance_batch.created_at, format: :short) %></td>
         <td><%= clearance_batch.items.count %></td>
-        <td><%=link_to "View Report", successful_clearances_clearance_batch_path(clearance_batch.id) %></td>
+        <td><%=link_to "View Report", "#{successful_clearances_reports_path}?#{{batch_id: clearance_batch.id}.to_query}" %></td>
       </tr>
     <%- end -%>
   </tbody>

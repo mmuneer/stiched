@@ -9,6 +9,7 @@ gem "jquery-rails"
 gem "bootstrap-sass"
 
 group :test, :development do
+  gem "byebug"
   gem "rspec-rails"
   gem "factory_girl_rails"
   gem "capybara"
