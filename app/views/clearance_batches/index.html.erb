@@ -6,6 +6,12 @@
     <%= file_field_tag 'csv_batch_file', class: 'form-control' %>
   </div>
   <%= button_tag 'upload batch file', class: 'btn btn-primary' %>
+
+<% end %>
+<p>Or</p>
+<%= form_tag(scan_clearance_batches_path, multipart: true, class: 'form-inline', role: 'form') do %>
+    <%= label_tag 'manual_scan', 'Scan Manually' %>
+    <%= text_field_tag 'manual_scan' %>
 <% end %>
 
 <table class="table table-striped clearance_batches">
