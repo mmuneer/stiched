@@ -1,9 +1,4 @@
-FactoryGirl.define do  factory :clearance_log do
-    item_id 1
-message "MyText"
-  end
-
-
+FactoryGirl.define do
   factory :clearance_batch do
 
   end

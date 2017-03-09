@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  resources :clearance_batches, only: [:index, :create] do
+  resources :clearance_batches, only: [:index] do
     collection do
       post :scan
+      post :batch_process
     end
   end
 

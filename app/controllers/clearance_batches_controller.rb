@@ -4,8 +4,8 @@ class ClearanceBatchesController < ApplicationController
     @clearance_batches  = ClearanceBatch.all
   end
 
-  def create
-    clearancing_status = ClearancingService.new.process_file(params[:csv_batch_file].tempfile)
+  def batch_process
+    clearancing_status = ClearancingService.new(:BatchProcessor, params[:csv_batch_file].tempfile).process
     clearance_batch    = clearancing_status.clearance_batch
     alert_messages     = []
     if clearance_batch.persisted?
