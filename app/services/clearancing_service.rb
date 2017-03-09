@@ -1,5 +1,3 @@
-require 'csv'
-require 'ostruct'
 class ClearancingService
   attr_reader :processor, :data
 

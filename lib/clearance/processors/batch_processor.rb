@@ -46,7 +46,7 @@ module Clearance
           return "Item id #{potential_item_id} could not be clearanced"
         end
 
-        return nil
+        return false
 
       end
 
