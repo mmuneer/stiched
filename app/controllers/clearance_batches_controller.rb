@@ -25,13 +25,14 @@ class ClearanceBatchesController < ApplicationController
   end
 
   def scan
-    clearancing_status = ClearancingService.new(:Scanner, params[:barcode]).process
+    clearancing_status = ClearancingService.new(Clearance::Processors::Scanner.new,
+                                                Clearance::Validators::ScanValidator.new,
+                                                params[:barcode]).process
     if clearancing_status.sucesss
-      flash[:notice] = clearancing_status[:message]
+      flash[:notice] = clearancing_status.message
     else
-      flash[:alert] = clearancing_status[:message]
+      flash[:alert] = "Item has been clearanced"
     end
-    byebug
     redirect_to action: :index
   end
 

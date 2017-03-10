@@ -3,9 +3,9 @@ module Clearance
   module Processors
     class Scanner
 
-      def self.process(barcode)
+      def process(barcode, validator)
         clearancing_status = create_clearancing_status
-        clearancing_error = what_is_the_clearancing_error?(barcode)
+        clearancing_error = validator.error(barcode)
         return status(clearancing_status, false, clearancing_error) if clearancing_error
         clearance!(barcode)
         return status(clearancing_status, true)
@@ -13,18 +13,18 @@ module Clearance
 
       private
 
-      def self.status(obj, status, message=nil)
+      def status(obj, status, message=nil)
         obj.success = status
         obj.message = message
         return obj
       end
 
-      def self.clearance!(barcode)
+      def clearance!(barcode)
         item = Item.where(barcode: barcode).first
         item.clearance!
       end
 
-      def self.create_clearancing_status
+      def create_clearancing_status
         OpenStruct.new(
             success: false,
             message: '')
