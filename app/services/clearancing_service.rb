@@ -1,17 +1,14 @@
 class ClearancingService
-  attr_reader :processor, :data
+  attr_reader :processor, :data, :validator
 
-  def initialize(processor_type, data)
-    begin
-      @processor = Clearance::Processors.const_get(processor_type)
-      @data = data
-    rescue
-      raise "Unknown processor #{processor_type}"
-    end
+  def initialize(processor, validator, data)
+    @processor = processor
+    @validator = validator
+    @data = data
   end
 
   def process
-    processor.process(data)
+    processor.process(data, validator)
   end
 
 end

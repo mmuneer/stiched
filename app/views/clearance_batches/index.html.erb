@@ -11,7 +11,7 @@
 <p>Or</p>
 <%= form_tag(scan_clearance_batches_path, multipart: true, class: 'form-inline', role: 'form') do %>
     <%= label_tag 'manual_scan', 'Scan Manually' %>
-    <%= text_field_tag 'manual_scan' %>
+    <%= text_field_tag 'barcode' %>
 <% end %>
 
 <table class="table table-striped clearance_batches">

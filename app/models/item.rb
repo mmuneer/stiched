@@ -11,7 +11,7 @@ class Item < ActiveRecord::Base
 
   scope :sellable, -> { where(status: SELLABLE) }
   scope :clearanced, -> { where(status: CLEARANCED) }
-  scope :by_batch, ->(id) { where(clearance_batch_id: id)}
+  scope :by_batch, ->(id) { where(clearance_batch_id: id) }
 
 
   def clearance!

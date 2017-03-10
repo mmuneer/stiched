@@ -9,7 +9,8 @@
 def make_items(style,color,sizes: { 'M' => 10, 'S' => 5, 'L' => 10 })
   sizes.each do |size,count|
     count.times do
-      Item.create(color: color, size: size, status: 'sellable', style: style)
+      item = Item.create(color: color, size: size, status: 'sellable', style: style)
+      item.update_attributes(barcode: item.id.to_s)
     end
   end
 end

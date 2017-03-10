@@ -5,7 +5,9 @@ class ClearanceBatchesController < ApplicationController
   end
 
   def batch_process
-    clearancing_status = ClearancingService.new(:BatchProcessor, params[:csv_batch_file].tempfile).process
+    clearancing_status = ClearancingService.new(Clearance::Processors::BatchProcessor.new,
+                                                Clearance::Validators::BatchValidator.new,
+                                                params[:csv_batch_file].tempfile).process
     clearance_batch    = clearancing_status.clearance_batch
     alert_messages     = []
     if clearance_batch.persisted?
@@ -23,8 +25,14 @@ class ClearanceBatchesController < ApplicationController
   end
 
   def scan
-
+    clearancing_status = ClearancingService.new(:Scanner, params[:barcode]).process
+    if clearancing_status.sucesss
+      flash[:notice] = clearancing_status[:message]
+    else
+      flash[:alert] = clearancing_status[:message]
+    end
+    byebug
+    redirect_to action: :index
   end
-
 
 end
