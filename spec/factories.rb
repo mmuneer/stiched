@@ -8,6 +8,7 @@ FactoryGirl.define do
     color "Blue"
     size "M"
     status "sellable"
+    barcode "barcode"
   end
 
   factory :style do

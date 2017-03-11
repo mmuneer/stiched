@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Clearance::Processors::BatchProcessor do
   subject(:batch_processor) { Clearance::Processors::BatchProcessor.new }
 
-  describe "::process_file" do
+  describe "::process" do
 
     context "total success" do
       let(:items)         { 5.times.map { FactoryGirl.create(:item) } }
