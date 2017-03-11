@@ -25,13 +25,19 @@ class ClearanceBatchesController < ApplicationController
   end
 
   def scan
-    clearancing_status = ClearancingService.new(Clearance::Processors::Scanner.new,
-                                                Clearance::Validators::ScanValidator.new,
-                                                params[:barcode]).process
-    if clearancing_status.sucesss
-      flash[:notice] = clearancing_status.message
+    if params[:barcode].casecmp('done') == 0
+      clearance_batch = ClearancingService.create_clearance_batch
+      flash[:notice]  = "#{clearance_batch.items.count} items clearanced in batch #{clearance_batch.id}"
     else
-      flash[:alert] = "Item has been clearanced"
+      clearancing_status = ClearancingService.new(Clearance::Processors::Scanner.new,
+                                                  Clearance::Validators::ScanValidator.new,
+                                                  params[:barcode]).process
+
+      if clearancing_status.success == true
+        flash[:notice] = "Item #{clearancing_status.item_id} has been added to the clearance queue"
+      else
+        flash[:alert] = clearancing_status.message
+      end
     end
     redirect_to action: :index
   end

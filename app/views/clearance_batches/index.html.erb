@@ -10,24 +10,26 @@
 <% end %>
 <p>Or</p>
 <%= form_tag(scan_clearance_batches_path, multipart: true, class: 'form-inline', role: 'form') do %>
-    <%= label_tag 'manual_scan', 'Scan Manually' %>
-    <%= text_field_tag 'barcode' %>
+    <%= label_tag 'manual_scan(type DONE when finished', 'Scan Manually' %>
+    <%= text_field_tag 'barcode', nil, class: 'form-control' %>
+    <%= button_tag 'Scan', class: 'btn btn-primary' %>
 <% end %>
 
 <table class="table table-striped clearance_batches">
   <thead>
     <tr>
+      <th style="text-align: center;">Batch</th>
+      <th style="text-align: center;">Date clearanced</th>
+      <th style="text-align: center;">Number of items clearanced</th>
       <th></th>
-      <th>Date clearanced</th>
-      <th>Number of items clearanced</th>
     </tr>
   </thead>
   <tbody>
     <%- @clearance_batches.each do |clearance_batch| -%>
       <tr>
-        <td>Clearance Batch <%= clearance_batch.id %></td>
-        <td><%= l(clearance_batch.created_at, format: :short) %></td>
-        <td><%= clearance_batch.items.count %></td>
+        <td style="text-align: center;">Batch <%= clearance_batch.id %></td>
+        <td style="text-align: center;"><%= l(clearance_batch.created_at, format: :short) %></td>
+        <td style="text-align: center;" ><%= clearance_batch.items.count %></td>
         <td><%=link_to "View Report", "#{successful_clearances_reports_path}?#{{batch_id: clearance_batch.id}.to_query}" %></td>
       </tr>
     <%- end -%>

@@ -18,7 +18,7 @@
           <td style="text-align: center;"> <%=item.style.type %></td>
           <td style="text-align: center;"> <%=item.size %></td>
           <td style="text-align: center;"> <%=item.color %></td>
-          <td style="text-align: center;"> <%=item.clearance_batch.created_at %></td>
+          <td style="text-align: center;"> <%=l(item.clearance_batch.created_at, format: :short) %></td>
           <td style="text-align: center;"> $<%=item.price_sold %></td>
         </tr>
     <% end %>
