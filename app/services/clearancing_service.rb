@@ -11,7 +11,8 @@ class ClearancingService
     processor.process(data, validator)
   end
 
-  def self.create_clearance_batch
+  # Batches up all the manually scanned items and adds them to a clearance batch
+  def self.create_clearance_batch_for_scanned_items
     batch = ClearanceBatch.new
     items_to_be_clearanced = Item.clearanced.by_batch(nil)
     items_to_be_clearanced.each  { |item| batch.items << item }

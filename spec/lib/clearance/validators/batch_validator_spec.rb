@@ -7,7 +7,7 @@ describe Clearance::Validators::BatchValidator do
     @validator = Clearance::Validators::BatchValidator.new
   end
 
-  context 'error function' do
+  describe 'error function' do
     it 'returns false if no error is found' do
       expect(@validator.error(items.first.id)).to eq(false)
     end

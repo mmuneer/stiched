@@ -28,4 +28,18 @@ describe ClearancingService do
       @service.process
     end
   end
+
+  context 'create_clearance_batch_for_scanned_items' do
+    before(:each) do
+      items.each  { |item| item.update_attributes(status: 'clearanced') }
+    end
+    it 'creates a new clearance batch' do
+      expect(ClearancingService.create_clearance_batch_for_scanned_items).to eq(ClearanceBatch.last)
+    end
+    it 'adds all scanned items to clearance batch' do
+      batch = ClearancingService.create_clearance_batch_for_scanned_items
+
+      expect(batch.items).to eq(items)
+    end
+  end
 end

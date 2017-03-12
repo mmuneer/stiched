@@ -14,8 +14,8 @@ describe "add new monthly clearance_batch" do
         expect(page).to have_content("Stitch Fix Clearance Tool")
         expect(page).to have_content("Clearance Batches")
         within('table.clearance_batches') do
-          expect(page).to have_content("Clearance Batch #{clearance_batch_1.id}")
-          expect(page).to have_content("Clearance Batch #{clearance_batch_2.id}")
+          expect(page).to have_content("Batch #{clearance_batch_1.id}")
+          expect(page).to have_content("Batch #{clearance_batch_2.id}")
         end
       end
 
@@ -38,7 +38,7 @@ describe "add new monthly clearance_batch" do
           expect(page).to have_content("#{items.count} items clearanced in batch #{new_batch.id}")
           expect(page).not_to have_content("item ids raised errors and were not clearanced")
           within('table.clearance_batches') do
-            expect(page).to have_content(/Clearance Batch \d+/)
+            expect(page).to have_content(/Batch \d+/)
           end
         end
 
@@ -60,7 +60,7 @@ describe "add new monthly clearance_batch" do
           expect(page).to have_content("#{valid_items.count} items clearanced in batch #{new_batch.id}")
           expect(page).to have_content("#{invalid_items.count} item ids raised errors and were not clearanced")
           within('table.clearance_batches') do
-            expect(page).to have_content(/Clearance Batch \d+/)
+            expect(page).to have_content(/Batch \d+/)
           end
         end
 

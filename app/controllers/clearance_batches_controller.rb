@@ -26,7 +26,7 @@ class ClearanceBatchesController < ApplicationController
 
   def scan
     if params[:barcode].casecmp('done') == 0
-      clearance_batch = ClearancingService.create_clearance_batch
+      clearance_batch = ClearancingService.create_clearance_batch_for_scanned_items
       flash[:notice]  = "#{clearance_batch.items.count} items clearanced in batch #{clearance_batch.id}"
     else
       clearancing_status = ClearancingService.new(Clearance::Processors::Scanner.new,
