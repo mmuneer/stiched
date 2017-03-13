@@ -86,6 +86,48 @@ describe "add new monthly clearance_batch" do
         end
       end
     end
+
+    describe "Manual Scan" do
+      context "success" do
+
+        it 'allows a user to scan a barcode successfully' do
+          item = FactoryGirl.create(:item, barcode: 'barcode')
+          visit "/"
+
+          fill_in('barcode', with: item.barcode)
+          click_button "Scan"
+
+          expect(page).to have_content("Item #{item.id} has been added to the clearance queue")
+          expect(page).not_to have_content('item ids raised errors and were not clearanced')
+        end
+
+        it 'notifies the user after he has successfully scanned all the barcodes' do
+          item = FactoryGirl.create(:item, barcode: 'barcode')
+          visit "/"
+
+          fill_in('barcode', with: item.barcode)
+          click_button "Scan"
+
+          expect(page).to have_content("Item #{item.id} has been added to the clearance queue")
+          expect(page).not_to have_content('item ids raised errors and were not clearanced')
+
+          fill_in('barcode', with: 'done')
+          click_button "Scan"
+
+          expect(page).to have_content('1 items clearanced')
+        end
+
+        it 'notifies the user if scanned barcode is not found' do
+          visit "/"
+
+          fill_in('barcode', with: '200')
+          click_button 'Scan'
+
+          expect(page).to have_content('Barcode 200 could not be found')
+        end
+
+      end
+    end
   end
 end
 
